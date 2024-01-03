@@ -1,0 +1,10 @@
+﻿################################################################################
+# この .gitignore ファイルは Microsoft(R) Visual Studio によって自動的に作成されました。
+################################################################################
+
+/.vs
+/CSharp/SimpleCalculator.Core/bin/Debug/net8.0
+/CSharp/SimpleCalculator.Core/obj
+/CSharp/SimpleCalculator.Wpf/.vs
+/CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf/bin/Debug/net8.0-windows
+/CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf/obj
