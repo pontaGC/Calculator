@@ -1,6 +1,4 @@
-﻿using SimpleCalculator.CalculateLogic.Core.Constants;
-
-namespace SimpleCalculator.CalculationLogic.Core
+﻿namespace SimpleCalculator.CalculationLogic.Core
 {
     /// <summary>
     /// Represents an operator to divide.
