@@ -40,7 +40,7 @@ namespace SimpleCalculator.Core.Mvvm
 
         #endregion
 
-        #region Protected methods
+        #region Protected Methods
 
         /// <summary>
         /// Sets the property and notify property changed
