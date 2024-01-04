@@ -15,7 +15,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         public DivideOperator()
             : base(
                   CalculatorTokenPriority.Divide,
-                  CalculatorSymbolConstants.Divide,
+                  SymbolConstants.Divide,
                   MathOperatorType.Binary)
         {
         }
