@@ -8,3 +8,5 @@
 /CSharp/SimpleCalculator.Wpf/.vs
 /CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf/bin/Debug/net8.0-windows
 /CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf/obj
+/CSharp/SimpleCalculator.CalculationLogic.Core/obj/Debug/net8.0
+/CSharp/SimpleCalculator.CalculationLogic.Core/obj
