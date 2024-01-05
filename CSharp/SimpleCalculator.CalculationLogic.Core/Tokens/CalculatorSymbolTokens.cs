@@ -5,7 +5,7 @@ namespace SimpleCalculator.CalculationLogic.Core
     /// <summary>
     /// Represents all symbol tokens in expression used in calculator.
     /// </summary>
-    public class CalculatorSymbolTokens
+    public class CalculatorSymbolTokens : ICalculatorSymbolTokens
     {
         #region Constructors
 
@@ -21,42 +21,29 @@ namespace SimpleCalculator.CalculationLogic.Core
             this.Subtract = new SubtractOperator();
             this.Multiply = new MultiplyOperator();
             this.Divide = new DivideOperator();
-
-            this.AllTokens = new CalculatorToken[]
-            {
-                this.LeftRoundBracket,
-                this.RightRoundBracket,
-                this.Add,
-                this.Subtract,
-                this.Multiply,
-                this.Divide,
-            };
         }
 
         #endregion
 
         #region Properties
 
-        /// <summary>
-        /// Gets a collection of all symbol tokens.
-        /// </summary>
-        public IReadOnlyCollection<CalculatorToken> AllTokens { get; }
+        /// <inheritdoc />
+        public IEnumerable<CalculatorToken> AllTokens
+            => this.AllBrackets.Concat(this.AllOperators);
 
         #region Brackets
 
         /// <summary>
         /// Gets a left round bracket token.
         /// </summary>
-        public RoundBracketToken LeftRoundBracket { get; }
+        internal RoundBracketToken LeftRoundBracket { get; }
 
         /// <summary>
         /// Gets a right round bracket token.
         /// </summary>
-        public RoundBracketToken RightRoundBracket { get; }
+        internal RoundBracketToken RightRoundBracket { get; }
 
-        /// <summary>
-        /// Gets a collection of all brackets.
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<CalculatorToken> AllBrackets
         {
             get
@@ -73,26 +60,24 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// <summary>
         /// Gets an operator to add.
         /// </summary>
-        public AddOperator Add { get; }
+        internal AddOperator Add { get; }
 
         /// <summary>
         /// Gets an operator to subtract.
         /// </summary>
-        public SubtractOperator Subtract { get; }
+        internal SubtractOperator Subtract { get; }
 
         /// <summary>
         /// Gets an operator to multiply.
         /// </summary>
-        public MultiplyOperator Multiply { get; }
+        internal MultiplyOperator Multiply { get; }
 
         /// <summary>
         /// Gets an operator to divide.
         /// </summary>
-        public DivideOperator Divide { get; }
+        internal DivideOperator Divide { get; }
 
-        /// <summary>
-        /// Gets a collection of all math operators.
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<MathOperator> AllOperators
         {
             get
@@ -104,12 +89,9 @@ namespace SimpleCalculator.CalculationLogic.Core
             }
         }
 
-        /// <summary>
-        /// Gets a collection of all binary oeprators, e.g. "+", "/".
-        /// </summary>
+        /// <inheritdoc />
         public IEnumerable<MathOperator> AllBinaryOpeartors
             => this.AllOperators.Where(op => op.OperatorType == MathOperatorType.Binary);
-
 
         #endregion
 
@@ -117,11 +99,7 @@ namespace SimpleCalculator.CalculationLogic.Core
 
         #region Public Methods
 
-        /// <summary>
-        /// Finds the symbol token whose value is same as the given token value.
-        /// </summary>
-        /// <param name="tokenValue">The token value to look for.</param>
-        /// <returns>A symbol token if finding symbol token is successful, otherwise, returns <c>null</c>.</returns>
+        /// <inheritdoc />
         [return: MaybeNull]
         public CalculatorToken FindSymbolToken(string tokenValue)
         {
@@ -139,11 +117,7 @@ namespace SimpleCalculator.CalculationLogic.Core
             return null;
         }
 
-        /// <summary>
-        /// Finds the binary operator token whose value is same as the operator string.
-        /// </summary>
-        /// <param name="operatorString">The operator string to look for.</param>
-        /// <returns>A binary operator if finding it is successful, otherwise, <c>null</c>.</returns>
+        /// <inheritdoc />
         [return: MaybeNull]
         public MathOperator FindBinaryOperator(string operatorString)
         {

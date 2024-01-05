@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an operator to add.
     /// </summary>
-    public sealed class AddOperator : MathOperator
+    internal sealed class AddOperator : MathOperator
     {
         #region Constructors
 

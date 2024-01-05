@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an operator to divide.
     /// </summary>
-    public sealed class DivideOperator : MathOperator
+    internal sealed class DivideOperator : MathOperator
     {
         #region Constractors
 

@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an operator to subtract.
     /// </summary>
-    public sealed class SubtractOperator : MathOperator
+    internal sealed class SubtractOperator : MathOperator
     {
         #region Constructors
 

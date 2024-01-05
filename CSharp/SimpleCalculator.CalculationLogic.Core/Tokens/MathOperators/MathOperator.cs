@@ -18,7 +18,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         public MathOperator(uint priority, string value, MathOperatorType type)
             : base(priority, value, CalculatorTokenType.Symbol)
         {
-            OperatorType = type;
+            this.OperatorType = type;
         }
 
         #endregion
@@ -54,7 +54,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// <remarks>Returns <c>double.NaN</c> if the default function is invoked.</remarks>
         public virtual double UnaryOperate(double x)
         {
-            Debug.Assert(OperatorType == MathOperatorType.Unary, "this.Type == MathOperatorType.Unary");
+            Debug.Assert(this.IsUnaryOperator, "this.Type == MathOperatorType.Unary");
             return double.NaN;
         }
 
@@ -67,7 +67,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// <remarks>Returns <c>double.NaN</c> if the default function is invoked.</remarks>
         public virtual double BinaryOperate(double x, double y)
         {
-            Debug.Assert(OperatorType == MathOperatorType.Binary, "this.Type == MathOperatorType.Binary");
+            Debug.Assert(this.IsBinaryOperator, "this.Type == MathOperatorType.Binary");
             return double.NaN;
         }
 

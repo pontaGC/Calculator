@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents an operator to multiply.
     /// </summary>
-    public sealed class MultiplyOperator : MathOperator
+    internal sealed class MultiplyOperator : MathOperator
     {
         #region Constructors
 
