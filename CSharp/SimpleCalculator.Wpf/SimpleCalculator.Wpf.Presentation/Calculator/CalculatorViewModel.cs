@@ -30,15 +30,13 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculatorViewModel"/> class.
         /// </summary>
-        /// <param name="infixNotationService">The infix notation service.</param>
+        /// <param name="infixNotationCalculateService">The infix notation calculate service.</param>
         /// <param name="symbolTokens">The calculator symbol tokens.</param>
         public CalculatorViewModel(
-            IInfixNotationCalculateService infixNotationService,
+            IInfixNotationCalculateService infixNotationCalculateService,
             ICalculatorSymbolTokens symbolTokens)
         {
-            infixNotationService.ThrowArgumentNullException(nameof(infixNotationService));
-
-            infixNotationCalculateService = infixNotationService;
+            this.infixNotationCalculateService = infixNotationCalculateService;
             this.symbolTokens = symbolTokens;
 
             ResetCalculator();

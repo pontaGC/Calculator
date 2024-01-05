@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using SimpleCalculator.Core.Utils;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
 namespace SimpleCalculator.Core.Extensions
@@ -154,29 +155,6 @@ namespace SimpleCalculator.Core.Extensions
         }
 
         /// <summary>
-        /// Determines whether there is the same element both the two sequence.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the elements of the sequence.</typeparam>
-        /// <param name="source">The source sequence.</param>
-        /// <param name="other">The other sequence.</param>
-        /// <returns><c>true</c>, if the same element in the two sequence is found. Otherwise; <c>false</c>.</returns>
-        [DebuggerStepThrough]
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-        public static bool ContainsSameElement<TSource>(this IEnumerable<TSource> source, IEnumerable<TSource> other)
-        {
-            source.ThrowArgumentNullException(nameof(source));
-            other.ThrowArgumentNullException(nameof(other));
-
-            if (source.IsEmpty() || other.IsEmpty())
-            {
-                return false;
-            }
-
-            var otherElements = other.ToArraySafe();
-            return source.Any(sourceElement => otherElements.Contains(sourceElement));
-        }
-
-        /// <summary>
         /// Indicates whether a sequence does not contain any element.
         /// </summary>
         /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
@@ -198,30 +176,6 @@ namespace SimpleCalculator.Core.Extensions
         public static IEnumerable<TResult> ToEmptyIfNull<TResult>(this IEnumerable<TResult> source)
         {
             return source ?? Enumerable.Empty<TResult>();
-        }
-
-        /// <summary>
-        /// Creates an array from a <see cref="IEnumerable{T}"/>. If the sequence is <c>null</c>, creates an empty array.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        /// <param name="source">An <see cref="IEnumerable{T}"/> to create an array from.</param>
-        /// <returns>An array that contains the elements from the input sequence, if the <c>source</c> is not <c>null</c>. Otherwise; An empty array, <c>Array.Empty()</c>.</returns>
-        [DebuggerStepThrough]
-        public static TSource[] ToArraySafe<TSource>(this IEnumerable<TSource> source)
-        {
-            return source is null ? Array.Empty<TSource>() : source.ToArray();
-        }
-
-        /// <summary>
-        /// Creates a list from a <see cref="IEnumerable{T}"/>. If the sequence is <c>null</c>, creates an empty list.
-        /// </summary>
-        /// <typeparam name="TSource">The type of the source enumerable.</typeparam>
-        /// <param name="source">An <see cref="IEnumerable{T}"/> to create a list from.</param>
-        /// <returns>A list that contains the elements from the input sequence, if the <c>source</c> is not <c>null</c>. Otherwise; A empty list.</returns>
-        [DebuggerStepThrough]
-        public static List<TSource> ToListSafe<TSource>(this IEnumerable<TSource> source)
-        {
-            return (source ?? Enumerable.Empty<TSource>()).ToList();
         }
     }
 }
