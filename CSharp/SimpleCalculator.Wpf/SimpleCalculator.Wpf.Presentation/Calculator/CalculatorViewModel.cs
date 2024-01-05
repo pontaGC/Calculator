@@ -21,11 +21,13 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         private readonly IInfixNotationCalculateService infixNotationCalculateService;
         private readonly ICalculatorSymbolTokens symbolTokens;
 
+        private readonly OperatorConverter operatorConverter = new OperatorConverter();
         private readonly List<string> displayExpressionTokens = new List<string>();
-        private readonly List<CalculatorToken> calculatorTokens; // for calculation logic
+        private readonly List<CalculatorToken> calculatorTokens = new List<CalculatorToken>(); // for calculation logic
 
         private string currentExpression;
         private string numericalInput;
+        private string lastInput;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculatorViewModel"/> class.
@@ -39,14 +41,14 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             this.infixNotationCalculateService = infixNotationCalculateService;
             this.symbolTokens = symbolTokens;
 
-            ResetCalculator();
+            this.ResetCalculator();
 
-            InputZeroCommand = new DelegateCommand<string>(this.InputZero);
-            InputNonZeroIntegerCommand = new DelegateCommand<string>(this.InputNonZeroInteger);
-            InputPeriodCommand = new DelegateCommand<string>(this.InputPeriod);
-            InputBinaryOperatorCommand = new DelegateCommand<string>(this.InputBinaryOperator);
-            ResetCommand = new DelegateCommand(this.ResetCalculator);
-            CalculateCommand = new DelegateCommand(this.Calculate);
+            this.InputZeroCommand = new DelegateCommand<string>(this.InputZero);
+            this.InputNonZeroIntegerCommand = new DelegateCommand<string>(this.InputNonZeroInteger);
+            this.InputPeriodCommand = new DelegateCommand<string>(this.InputPeriod);
+            this.InputBinaryOperatorCommand = new DelegateCommand<string>(this.InputBinaryOperator);
+            this.ResetCommand = new DelegateCommand(this.ResetCalculator);
+            this.CalculateCommand = new DelegateCommand(this.Calculate);
         }
 
         #region Properties
@@ -55,7 +57,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         /// Gets a value indicating the calculator is initialized or the calculation is completed.
         /// </summary>
         /// <returns><c>true</c> if there is no calculator token, otherwise, <c>false</c>.</returns>
-        private bool IsInitialized => calculatorTokens.IsEmpty();
+        private bool IsInitialized => this.calculatorTokens.IsEmpty();
 
         /// <summary>
         /// Gets or sets a current expresion to calculate.
@@ -63,8 +65,8 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         public string CurrentExpression
         {
             [return: NotNull]
-            get => currentExpression;
-            set => this.SetProperty(ref currentExpression, value);
+            get => this.currentExpression;
+            set => this.SetProperty(ref this.currentExpression, value);
         }
 
         /// <summary>
@@ -73,8 +75,15 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         public string NumericalInput
         {
             [return: NotNull]
-            get => numericalInput ?? string.Empty;
-            set => this.SetProperty(ref numericalInput, value);
+            get => this.numericalInput ?? string.Empty;
+            set
+            {
+                if (this.SetProperty(ref this.numericalInput, value))
+                {
+                    // Updated
+                    this.lastInput = value;
+                }
+            }
         }
 
         /// <summary>
@@ -131,14 +140,29 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 return;
             }
 
-            if (IsInitialized)
+            if (this.IsInitialized)
             {
-                // Select zero after calculation completion
-                NumericalInput = NumericalCharacters.Zero;
+                this.InitializeCurrentExpression();
+
+                if (this.IsFirstInput())
+                {
+                    this.NumericalInput = NumericalCharacters.Zero;
+                }
+                else
+                {
+                    this.NumericalInput += zero;
+                }
+
+                return;
+            }
+
+            if (this.IsPreviousInputMathOperator())
+            {
+                this.NumericalInput = NumericalCharacters.Zero;
             }
             else
             {
-                NumericalInput += zero;
+                this.NumericalInput += zero;
             }
         }
 
@@ -149,14 +173,29 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 return;
             }
 
-            if (IsInitialized || IsCurrentInputtingNumberZero())
+            if (this.IsInitialized)
             {
-                // Replace initial value (zero) to selected number
-                NumericalInput = selectedNumber;
+                this.InitializeCurrentExpression();
+
+                if (this.IsFirstInput())
+                {
+                    this.NumericalInput = selectedNumber;
+                }
+                else
+                {
+                    this.NumericalInput += selectedNumber;
+                }
+
+                return;
+            }
+
+            if (this.IsPreviousInputMathOperator())
+            {
+                this.NumericalInput = selectedNumber;
             }
             else
             {
-                NumericalInput += selectedNumber;
+                this.NumericalInput += selectedNumber;
             }
         }
 
@@ -164,92 +203,114 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         {
             Debug.Assert(period == NumericalCharacters.Period, $"Input must be period. Actual input: {period}");
 
-            var lastInputted = NumericalInput.GetLastCharacter();
-            if (lastInputted == period)
+            if (this.IsInitialized)
+            {
+                this.InitializeCurrentExpression();
+            }
+
+            if ( this.NumericalInput.Contains(period))
             {
                 // The number of decimal point must be one
                 return;
             }
 
-            NumericalInput += period;
+            this.NumericalInput += period;
+
+            this.lastInput = period;
         }
 
         private void InputBinaryOperator(string selectedOperator)
         {
-            // The operators displayed on the calculator and used by calculation logic may be different.
-            var operatorConverter = new OperatorConverter();
-            if (!operatorConverter.TryConvertDisplayToLogicString(selectedOperator, out var operatorLogicString))
+            if (!this.TryGetMathOperator(selectedOperator,  out var @operator))
             {
                 Debug.Fail($"Found the unexpected binary operator: {selectedOperator}");
                 return;
             }
 
-            var binaryOperatorToken = symbolTokens.FindBinaryOperator(operatorLogicString);
-            if (binaryOperatorToken is null)
+            if (!@operator.IsBinaryOperator)
             {
                 return;
             }
 
-            if (IsPreviousInputBinaryOperator())
+            if (this.IsPreviousInputBinaryOperator())
             {
                 // Update binary operator
-                calculatorTokens.RemoveLast(); // Remove previous operator
-                calculatorTokens.Add(binaryOperatorToken);
+                this.calculatorTokens.RemoveLast(); // Remove previous operator
+                this.calculatorTokens.Add(@operator);
 
-                displayExpressionTokens.RemoveLast(); // Remove previous operator
-                AppendDisplayTokens(selectedOperator);
-                return;
+                this.displayExpressionTokens.RemoveLast(); // Remove previous operator
+                this.AppendDisplayExpressionTokens(selectedOperator);
+            }
+            else
+            {
+                // Determines number term
+                this.calculatorTokens.Add(NumberTokenFactory.Create(NumericalInput));
+                this.calculatorTokens.Add(@operator);
+
+                this.AppendDisplayExpressionTokens(this.NumericalInput, selectedOperator);
             }
 
-            // Determines number term
-            calculatorTokens.Add(NumberTokenFactory.Create(NumericalInput));
-            calculatorTokens.Add(binaryOperatorToken);
-
-            AppendDisplayTokens(NumericalInput, selectedOperator);
+            this.lastInput = selectedOperator;
         }
 
         private void Calculate()
         {
-            if (IsInitialized)
+            if (this.IsInitialized)
             {
                 return;
             }
 
+            // Determines number term
+            this.calculatorTokens.Add(NumberTokenFactory.Create(this.NumericalInput));
+            this.AppendDisplayExpressionTokens(this.NumericalInput);
+
             try
             {
-                var calculatedResult = infixNotationCalculateService.Calculate(calculatorTokens);
-                NumericalInput = calculatedResult.ToString(CultureInfo.CurrentCulture);
+                var calculatedResult = this.infixNotationCalculateService.Calculate(calculatorTokens);
+                if (int.TryParse(calculatedResult.ToString(), out var integerResult))
+                {
+                    this.NumericalInput = integerResult.ToString();
+                }
+                else
+                {
+                    this.NumericalInput = Math.Round(calculatedResult, 15).ToString();
+                }
             }
             catch (Exception ex)
             {
-                NumericalInput = ex.Message;
+                this.NumericalInput = ex.Message;
             }
             finally
             {
-                InitializeCalculatorTokens();
+                // Current expression is not be initialized here,
+                // so that the target calculation can be checked 
+                this.InitializeCalculatorTokens();
+                this.lastInput = string.Empty;
             }
         }
 
         private void ResetCalculator()
         {
-            InitializeUserInput();
-            InitializeCurrentExpression();
-            InitializeCalculatorTokens();
+            this.InitializeUserInput();
+            this.InitializeCurrentExpression();
+            this.InitializeCalculatorTokens();
         }
 
         private void InitializeCurrentExpression()
         {
-            CurrentExpression = string.Empty;
+            this.CurrentExpression = string.Empty;
         }
 
         private void InitializeCalculatorTokens()
         {
-            calculatorTokens.Clear();
+            this.displayExpressionTokens.Clear();
+            this.calculatorTokens.Clear();
         }
 
         private void InitializeUserInput()
         {
-            NumericalInput = NumericalCharacters.Zero;
+            this.NumericalInput = NumericalCharacters.Zero;
+            this.lastInput = string.Empty;
         }
 
         private static bool IsZeroString(string numberString)
@@ -259,24 +320,53 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
         private bool IsCurrentInputtingNumberZero()
         {
-            return NumericalInput == NumericalCharacters.Zero;
+            return this.NumericalInput == NumericalCharacters.Zero;
         }
 
-        private bool IsPreviousInputBinaryOperator()
+        private bool TryGetMathOperator(string input, out MathOperator result)
         {
-            var lastTermToken = calculatorTokens.Last();
-            if (lastTermToken is not MathOperator @operator)
+            result = null;
+
+            // The operators displayed on the calculator and used by calculation logic may be different.
+            if (!this.operatorConverter.TryConvertDisplayToLogicString(input, out var operatorLogicCharacter))
             {
                 return false;
             }
 
-            return @operator.IsBinaryOperator;
+            result = this.symbolTokens.FindMathOperator(operatorLogicCharacter);
+            return result is not null;
+         }
+
+        private bool IsPreviousInputBinaryOperator()
+        {
+            if (!this.operatorConverter.TryConvertDisplayToLogicString(this.lastInput, out var operatorLogicCharacter))
+            {
+                return false;
+            }
+
+            var @operator = this.symbolTokens.FindBinaryOperator(operatorLogicCharacter);
+            return @operator is not null;
         }
 
-        private void AppendDisplayTokens(params string[] tokens)
+        private bool IsPreviousInputMathOperator()
         {
-            displayExpressionTokens.AddRange(tokens);
-            CurrentExpression = string.Join(' ', displayExpressionTokens);
+            return this.TryGetMathOperator(this.lastInput, out _);
+        }
+
+        private bool IsFirstInput()
+        {
+            return string.IsNullOrEmpty(this.lastInput);
+        }
+
+        private void AppendDisplayExpressionTokens(params string[] tokens)
+        {
+            if (tokens.IsNullOrEmpty())
+            {
+                return;
+            }
+
+            this.displayExpressionTokens.AddRange(tokens);
+            this.CurrentExpression = string.Join(' ', displayExpressionTokens);
         }
 
         #endregion

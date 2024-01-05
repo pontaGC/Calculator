@@ -6,14 +6,4 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Window1.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Window1.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
 </Project>

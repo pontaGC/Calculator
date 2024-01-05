@@ -4,10 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:root="clr-namespace:SimpleCalculator.Wpf.Presentation"
              xmlns:local="clr-namespace:SimpleCalculator.Wpf.Presentation.Calculator"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="400"
+             MinWidth="300"
+             MinHeight="250"
+             d:DesignHeight="200" d:DesignWidth="400"
              d:DataContext="{d:DesignInstance local:CalculatorViewModel, IsDesignTimeCreatable=False}">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -19,74 +20,33 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.7*" />
+        </Grid.ColumnDefinitions>
 
         <!--Expresion & Number input area-->
-        <Grid Grid.Row="0" Height="100">
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-
+            
             <TextBox x:Name="CurrentExpressionText"
                      Grid.Row="0"
                      Style="{StaticResource CurrentExpressionTextBoxStyle}"
-                     Text="{Binding CurrentExpression, Mode=OneWay}" />
+                     Text="{Binding CurrentExpression, Mode=OneWay}"
+                     Height="Auto" />
             <TextBox x:Name="NumberInputText"
                      Grid.Row="1"
                      Style="{StaticResource NumberInputTextBoxStyle}"
-                     Text="{Binding NumericalInput, Mode=OneWay}" />
+                     Text="{Binding NumericalInput, Mode=OneWay}"
+                     Height="30"/>
         </Grid>
-        
-        <!--Buttons area-->
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <!--Numerical buttons-->
-            <!-- 7 8 9 -->
-            <!-- 4 5 6 -->
-            <!-- 1 2 3 -->
-            <!-- 0 00 . -->
-            <UniformGrid Columns="3">
-                <Button Content="{x:Static root:NumericalCharacters.Seven}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Eight}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Nine}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
 
-                <Button Content="{x:Static root:NumericalCharacters.Four}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Five}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Six}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-
-                <Button Content="{x:Static root:NumericalCharacters.One}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Two}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Three}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-
-                <Button Content="{x:Static root:NumericalCharacters.Zero}" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.ZeroZero}" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-                <Button Content="{x:Static root:NumericalCharacters.Period}" Command="{Binding InputPeriodCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-            </UniformGrid>
-
-            <!--Bracket and operation buttons-->
-            <UniformGrid Columns="2">
-                <Button Content="{x:Static root:OperatorCharacters.LeftRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectLeftRoundBracketCommand, Mode=OneTime}" />
-                <Button Content="{x:Static root:OperatorCharacters.RightRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectRightRoundBracketCommand, Mode=OneTime}" />
-
-                <Button Content="{x:Static root:OperatorCharacters.Multiply}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectBinaryOperatorCommand, Mode=OneTime}" />
-                <Button Content="{x:Static root:OperatorCharacters.Divide}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectBinaryOperatorCommand, Mode=OneTime}" />
-
-                <Button Content="{x:Static root:OperatorCharacters.Add}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectBinaryOperatorCommand, Mode=OneTime}" />
-                <Button Content="{x:Static root:OperatorCharacters.Subtract}" Style="{StaticResource OperatorButtonStyle}"
-                        Command="{Binding SelectBinaryOperatorCommand, Mode=OneTime}" />
-
-                <Button Content="{x:Static root:OperatorCharacters.ClearSign}" Style="{StaticResource ClearButtonStyle}"
-                        Command="{Binding ResetCommand, Mode=OneTime}" />
-                <Button Content="{x:Static root:OperatorCharacters.EqualSign}" Style="{StaticResource EqualButtonStyle}"
-                        Command="{Binding CalculateCommand, Mode=OneTime}"
-                        CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}" />
-            </UniformGrid>
-        </StackPanel>
+        <local:NumberKeyboard Grid.Row="1" Grid.Column="0" Margin="1, 1, 0.5, 1" />
+        <local:OperatorKeyboard Grid.Row="1" Grid.Column="1" Margin="0.5, 1, 1, 1" />
     </Grid>
 </UserControl>

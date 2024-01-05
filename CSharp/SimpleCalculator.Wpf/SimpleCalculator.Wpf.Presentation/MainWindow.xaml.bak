@@ -8,19 +8,14 @@
         xmlns:calc="clr-namespace:SimpleCalculator.Wpf.Presentation.Calculator"
         xmlns:core="clr-namespace:SimpleCalculator.Core;assembly=SimpleCalculator.Core"
         mc:Ignorable="d"
-        MinWidth="320"
-        MinHeight="300"
+        Height="200"
+        Width="300"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
         Title="{x:Static core:SimpleCalculatorConstants.ToolTitle}"
         d:Height="300"
         d:DataContext="{d:DesignInstance root:MainWindowViewModel, IsDesignTimeCreatable=False}">
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type calc:CalculatorViewModel}">
-            <calc:CalculatorView />
-        </DataTemplate>
-    </Window.Resources>
     <Grid>
-        <ContentControl Grid.Row="0" Content="{Binding CalcularatorViewModel, Mode=OneWay}" />
+        <calc:CalculatorView  />
     </Grid>
 </Window>

@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\SimpleCalculator.CalculationLogic.Core\SimpleCalculator.CalculationLogic.Core.csproj" />
+    <ProjectReference Include="..\..\SimpleCalculator.CalculationLogic\SimpleCalculator.CalculationLogic.csproj" />
     <ProjectReference Include="..\..\SimpleCalculator.Core\SimpleCalculator.Core.csproj" />
+    <ProjectReference Include="..\SimpleCalculator.Wpf.Presentation\SimpleCalculator.Wpf.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

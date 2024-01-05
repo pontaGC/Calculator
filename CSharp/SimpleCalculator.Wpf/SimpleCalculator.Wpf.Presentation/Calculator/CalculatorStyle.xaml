@@ -9,43 +9,57 @@
         <Setter Property="Height" Value="Auto" />        
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="TextAlignment" Value="Right" />
-        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
     </Style>
 
     <Style x:Key="CurrentExpressionTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource CommonCalculatorTextBoxStyle}">
         <Setter Property="Foreground" Value="DarkGray" />
-        <Setter Property="FontSize" Value="9" />
+        <Setter Property="FontSize" Value="11" />
     </Style>
 
     <Style x:Key="NumberInputTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource CommonCalculatorTextBoxStyle}">
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <!--Common keyboard button style-->
+    <Style x:Key="CommonKeyboardButtonStyle" TargetType="Button">
+        <Setter Property="MinWidth" Value="40" />
+        <Setter Property="MinHeight" Value="15" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="2" Background="{TemplateBinding Background}"
+                            Margin="1.5">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
         
     <!--Numerical button style-->
-    <Style x:Key="NumericalButtonSytle" TargetType="Button">
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+    <Style x:Key="NumericalButtonSytle" TargetType="Button"
+           BasedOn="{StaticResource CommonKeyboardButtonStyle}">
+           <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <!--Operator button style-->
-    <Style x:Key="OperatorButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Height" Value="50" />
-        <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+    <Style x:Key="OperatorButtonStyle" TargetType="Button"
+           BasedOn="{StaticResource CommonKeyboardButtonStyle}">
+          <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <!--Clear button style-->
-    <Style x:Key="ClearButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Height" Value="50" />
+    <Style x:Key="ClearButtonStyle" TargetType="Button"
+           BasedOn="{StaticResource CommonKeyboardButtonStyle}">
     </Style>
 
     <!--Equal button style-->
-    <Style x:Key="EqualButtonStyle" TargetType="Button">
-        <Setter Property="Width" Value="80" />
-        <Setter Property="Height" Value="50" />
+    <Style x:Key="EqualButtonStyle" TargetType="Button"
+           BasedOn="{StaticResource CommonKeyboardButtonStyle}">
         <Setter Property="Background" Value="CadetBlue" />
         <Setter Property="Foreground" Value="White" />
     </Style>

@@ -1,6 +1,10 @@
-﻿using SimpleCalculator.Core;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Threading;
+
+using SimpleCalculator.CalculateLogic;
+using SimpleCalculator.Core;
+using SimpleCalculator.Core.Injectors;
+using SimpleCalculator.Wpf.Presentation;
 
 namespace SimpleCalculator.Wpf
 {
@@ -14,12 +18,17 @@ namespace SimpleCalculator.Wpf
         {
             this.RegisterAppUnhandledExceptionHandler();
 
-            var mainWindow = new Window1()
-            {
-                Title = SimpleCalculatorConstants.ToolTitle,
-                DataContext = new Window1ViewModel(),
-            };
+            var container = ContainerFactory.Create();
+            RegisterDependencies(container, new CalculationLogicDependencyRegistrant());
+
+            var mainWindowFactory = new MainWindowFactory(container);
+            var mainWindow = mainWindowFactory.Create();
             mainWindow.ShowDialog();
+        }
+
+        private static void RegisterDependencies(IIoCContainer container, IDependenyRegistrant dependencyRegistrant)
+        {
+            dependencyRegistrant.Register(container);
         }
 
         #region Unhandled exception handlers

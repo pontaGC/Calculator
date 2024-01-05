@@ -119,6 +119,19 @@ namespace SimpleCalculator.CalculationLogic.Core
 
         /// <inheritdoc />
         [return: MaybeNull]
+        public MathOperator FindMathOperator(string operatorString)
+        {
+            if (string.IsNullOrEmpty(operatorString))
+            {
+                return null;
+            }
+
+            var foundOperator = this.AllOperators.FirstOrDefault(op => op.Value.Equals(operatorString, StringComparison.OrdinalIgnoreCase));
+            return foundOperator;
+        }
+
+        /// <inheritdoc />
+        [return: MaybeNull]
         public MathOperator FindBinaryOperator(string operatorString)
         {
             if (string.IsNullOrEmpty(operatorString))
