@@ -1,6 +1,7 @@
 ﻿using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Services;
 using SimpleCalculator.Core.Extensions;
+using SimpleCalculator.Core.Utils;
 
 namespace SimpleCalculator.CalculationLogic.Services
 {
@@ -14,7 +15,7 @@ namespace SimpleCalculator.CalculationLogic.Services
         /// <inheritdoc />
         public double Calculate(Stack<CalculatorToken> rpnStack)
         {
-            rpnStack.ThrowArgumentNullException(nameof(rpnStack));
+            ArgumentNullException.ThrowIfNull(rpnStack);
 
             if (rpnStack.IsEmpty())
             {

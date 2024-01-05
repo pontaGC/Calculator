@@ -17,7 +17,7 @@ namespace SimpleCalculator.CalculationLogic.Services
         /// <inheritdoc />
         public Stack<CalculatorToken> ConvertInfixToRPNStack(IEnumerable<CalculatorToken> infixNotationTokens)
         {
-            ArgumentGuard.RequireNotNull(infixNotationTokens, nameof(infixNotationTokens));
+            ArgumentNullException.ThrowIfNull(infixNotationTokens);
 
             var results = new List<CalculatorToken>();
             var workingStack = new Stack<CalculatorToken>();

@@ -1,7 +1,6 @@
 ﻿using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Services;
 using SimpleCalculator.Core.Mvvm;
-using SimpleCalculator.Core.Utils;
 using SimpleCalculator.Wpf.Presentation.Calculator;
 
 namespace SimpleCalculator.Wpf.Presentation
@@ -17,7 +16,7 @@ namespace SimpleCalculator.Wpf.Presentation
         /// <param name="infixNotationCalculateService">The infix notation calculate service.</param>
         public MainWindowViewModel(IInfixNotationCalculateService infixNotationCalculateService)
         {
-            ArgumentGuard.RequireNotNull(infixNotationCalculateService, nameof(infixNotationCalculateService));
+            ArgumentNullException.ThrowIfNull(infixNotationCalculateService);
 
             this.CalcularatorViewModel = new CalculatorViewModel(infixNotationCalculateService, new CalculatorSymbolTokens());
         }

@@ -1,7 +1,5 @@
 ﻿using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Services;
-using SimpleCalculator.Core.Extensions;
-using SimpleCalculator.Core.Utils;
 
 namespace SimpleCalculator.CalculationLogic.Services
 {
@@ -29,8 +27,8 @@ namespace SimpleCalculator.CalculationLogic.Services
             IExpressionNotationConverter expressionNotationConverter,
             IRPNCalculateService rpnCalculateService)
         {
-            ArgumentGuard.RequireNotNull(expressionNotationConverter, nameof(expressionNotationConverter));
-            ArgumentGuard.RequireNotNull(rpnCalculateService, nameof(rpnCalculateService));
+            ArgumentNullException.ThrowIfNull(expressionNotationConverter);
+            ArgumentNullException.ThrowIfNull(rpnCalculateService);
 
             this.expressionNotationConverter = expressionNotationConverter;
             this.rpnCalculateService = rpnCalculateService;
@@ -43,7 +41,7 @@ namespace SimpleCalculator.CalculationLogic.Services
         /// <inheritdoc />
         public double Calculate(IEnumerable<CalculatorToken> infixExpressionTokens)
         {
-            infixExpressionTokens.ThrowArgumentNullException(nameof(infixExpressionTokens));
+            ArgumentNullException.ThrowIfNull(infixExpressionTokens);
 
             try
             {
