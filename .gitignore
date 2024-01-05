@@ -11,3 +11,5 @@
 /CSharp/SimpleCalculator.CalculationLogic.Core/obj/Debug/net8.0
 /CSharp/SimpleCalculator.CalculationLogic.Core/obj
 /CSharp/SimpleCalculator.CalculationLogic.Core/bin/Debug/net8.0
+/CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf.Presentation/bin/Debug/net8.0-windows
+/CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf.Presentation/obj

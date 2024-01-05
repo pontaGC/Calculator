@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:SimpleCalculator.Wpf.Presentation.Converters">
+
+    <converter:OperatorConverter x:Key="OperatorConverter" />
+
+    <!--Calculator expression area styles-->
+    <Style x:Key="CommonCalculatorTextBoxStyle" TargetType="TextBox">
+        <Setter Property="Height" Value="Auto" />        
+        <Setter Property="IsReadOnly" Value="True" />
+        <Setter Property="TextAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+    <Style x:Key="CurrentExpressionTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource CommonCalculatorTextBoxStyle}">
+        <Setter Property="Foreground" Value="DarkGray" />
+        <Setter Property="FontSize" Value="9" />
+    </Style>
+
+    <Style x:Key="NumberInputTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource CommonCalculatorTextBoxStyle}">
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+        
+    <!--Numerical button style-->
+    <Style x:Key="NumericalButtonSytle" TargetType="Button">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+    </Style>
+
+    <!--Operator button style-->
+    <Style x:Key="OperatorButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+    </Style>
+
+    <!--Clear button style-->
+    <Style x:Key="ClearButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+    </Style>
+
+    <!--Equal button style-->
+    <Style x:Key="EqualButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="80" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Background" Value="CadetBlue" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+    
+</ResourceDictionary>
