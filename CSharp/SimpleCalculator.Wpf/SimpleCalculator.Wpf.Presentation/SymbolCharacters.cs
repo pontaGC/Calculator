@@ -11,6 +11,7 @@
         public const string Divide = @"÷";
 
         public const string ClearSign = @"C";
+        public const string ClearEntrySign = @"CE";
         public const string EqualSign = @"=";
 
         public const string LeftRoundBracket = @"(";

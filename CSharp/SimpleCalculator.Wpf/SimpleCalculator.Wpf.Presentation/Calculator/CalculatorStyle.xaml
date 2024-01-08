@@ -43,7 +43,9 @@
     <!--Numerical button style-->
     <Style x:Key="NumericalButtonSytle" TargetType="Button"
            BasedOn="{StaticResource CommonKeyboardButtonStyle}">
-           <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Background" Value="DarkGray" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <!--Operator button style-->

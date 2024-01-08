@@ -49,6 +49,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             this.InputLeftRoundBracketCommand = new DelegateCommand<string>(this.InputLeftRoundBracket);
             this.InputRightRoundBracketCommand = new DelegateCommand<string>(this.InputRightRoundBracket);
             this.InputBinaryOperatorCommand = new DelegateCommand<string>(this.InputBinaryOperator);
+            this.ResetNumericalInputCommand = new DelegateCommand(this.ResetNumericalInput);
             this.ResetCommand = new DelegateCommand(this.ResetCalculator);
             this.CalculateCommand = new DelegateCommand(this.Calculate);
         }
@@ -125,6 +126,11 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         /// Gets a command that is executed when an opeartor is selected.
         /// </summary>
         public ICommand InputBinaryOperatorCommand { get; }
+
+        /// <summary>
+        /// Gets a command that is executed when a clear entry is selected.
+        /// </summary>
+        public ICommand ResetNumericalInputCommand { get; }
 
         /// <summary>
         /// Gets a command that initializes a calculator.
@@ -322,6 +328,11 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 this.InitializeCalculatorTokens();
                 this.lastInput = string.Empty;
             }
+        }
+
+        private void ResetNumericalInput()
+        {
+            this.InitializeUserInput();
         }
 
         private void ResetCalculator()
