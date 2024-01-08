@@ -10,36 +10,6 @@ namespace SimpleCalculator.Core.Extensions
     public static class StringExtension
     {
         /// <summary>
-        /// Throws the <see cref="ArgumentNullException"/>
-        /// if <paramref name="source"/> is <c>null</c> or empty.
-        /// </summary>
-        /// <param name="source">The string to check.</param>
-        /// <param name="parameterName">The parameter name of the string to check.</param>
-        [DebuggerStepThrough]
-        public static void ThrowArgumentNullOrEmptyException(this string source, string parameterName)
-        {
-            if (string.IsNullOrEmpty(source))
-            {
-                throw new ArgumentNullException(parameterName);
-            }
-        }
-
-        /// <summary>
-        /// Throws the <see cref="ArgumentNullException"/>
-        /// if <paramref name="source"/> is <c>null</c> or empty, or consists only of white-space characters.
-        /// </summary>
-        /// <param name="source">The string to check.</param>
-        /// <param name="parameterName">The parameter name of the string to check.</param>
-        [DebuggerStepThrough]
-        public static void ThrowArgumentNullOrWhitespaceException(this string source, string parameterName)
-        {
-            if (string.IsNullOrWhiteSpace(source))
-            {
-                throw new ArgumentNullException(parameterName);
-            }
-        }
-
-        /// <summary>
         /// Gets a last character in the given string.
         /// </summary>
         /// <param name="source">The string to get.</param>
