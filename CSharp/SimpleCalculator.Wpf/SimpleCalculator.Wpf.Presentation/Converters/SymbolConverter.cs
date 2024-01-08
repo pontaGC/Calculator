@@ -12,23 +12,23 @@ namespace SimpleCalculator.Wpf.Presentation.Converters
     /// Converts the binding source value which type is <c>string</c> to the binding target value which type is <c>string</c>.
     /// </summary>
     [ValueConversion(typeof(string), typeof(string))]
-    internal class OperatorConverter : IValueConverter
+    internal class SymbolConverter : IValueConverter
     {
         private readonly IReadOnlyDictionary<string, string> operatorConversions;
 
         /// <summary>
-        /// Intializes a new instance of the <see cref="OperatorConverter"/> class.
+        /// Intializes a new instance of the <see cref="SymbolConverter"/> class.
         /// </summary>
-        public OperatorConverter()
+        public SymbolConverter()
         {
             this.operatorConversions = new Dictionary<string, string>()
             {
-                { OperatorCharacters.Add, LogicSymbols.Add },
-                { OperatorCharacters.Subtract, LogicSymbols.Subtract },
-                { OperatorCharacters.Multiply, LogicSymbols.Multiply },
-                { OperatorCharacters.Divide, LogicSymbols.Divide },
-                { OperatorCharacters.LeftRoundBracket, LogicSymbols.RoundBracket.Left },
-                { OperatorCharacters.RightRoundBracket, LogicSymbols.RoundBracket.Right },
+                { SymbolCharacters.Add, LogicSymbols.Add },
+                { SymbolCharacters.Subtract, LogicSymbols.Subtract },
+                { SymbolCharacters.Multiply, LogicSymbols.Multiply },
+                { SymbolCharacters.Divide, LogicSymbols.Divide },
+                { SymbolCharacters.LeftRoundBracket, LogicSymbols.RoundBracket.Left },
+                { SymbolCharacters.RightRoundBracket, LogicSymbols.RoundBracket.Right },
             };
         }
 

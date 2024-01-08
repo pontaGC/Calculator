@@ -1,9 +1,9 @@
 ﻿namespace SimpleCalculator.Wpf.Presentation
 {
     /// <summary>
-    /// Operator constant parameters for display.
+    /// Symbol constant parameters for display.
     /// </summary>
-    internal static class OperatorCharacters
+    internal static class SymbolCharacters
     {
         public const string Add = @"+";
         public const string Subtract = @"-";

@@ -21,7 +21,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         private readonly IInfixNotationCalculateService infixNotationCalculateService;
         private readonly ICalculatorSymbolTokens symbolTokens;
 
-        private readonly OperatorConverter operatorConverter = new OperatorConverter();
+        private readonly SymbolConverter operatorConverter = new SymbolConverter();
         private readonly List<string> displayExpressionTokens = new List<string>();
         private readonly List<CalculatorToken> calculatorTokens = new List<CalculatorToken>(); // for calculation logic
 

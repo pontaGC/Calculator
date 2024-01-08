@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:SimpleCalculator.Wpf.Presentation.Converters">
 
-    <converter:OperatorConverter x:Key="OperatorConverter" />
+    <converter:SymbolConverter x:Key="OperatorConverter" />
 
     <!--Calculator expression area styles-->
     <Style x:Key="CommonCalculatorTextBoxStyle" TargetType="TextBox">

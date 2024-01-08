@@ -19,24 +19,24 @@
     
     <UniformGrid Columns="2">
         <!-- ( ) -->
-        <Button Content="{x:Static root:OperatorCharacters.LeftRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.LeftRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputLeftRoundBracketCommand, Mode=OneTime}" />
-        <Button Content="{x:Static root:OperatorCharacters.RightRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.RightRoundBracket}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputRightRoundBracketCommand, Mode=OneTime}" />
         <!-- × ÷ -->
         <!-- + - -->
-        <Button Content="{x:Static root:OperatorCharacters.Multiply}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.Multiply}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputBinaryOperatorCommand, Mode=OneTime}" />
-        <Button Content="{x:Static root:OperatorCharacters.Divide}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.Divide}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputBinaryOperatorCommand, Mode=OneTime}" />
-        <Button Content="{x:Static root:OperatorCharacters.Add}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.Add}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputBinaryOperatorCommand, Mode=OneTime}" />
-        <Button Content="{x:Static root:OperatorCharacters.Subtract}" Style="{StaticResource OperatorButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.Subtract}" Style="{StaticResource OperatorButtonStyle}"
                 Command="{Binding InputBinaryOperatorCommand, Mode=OneTime}" />
         <!-- C = -->
-        <Button Content="{x:Static root:OperatorCharacters.ClearSign}" Style="{StaticResource ClearButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.ClearSign}" Style="{StaticResource ClearButtonStyle}"
                 Command="{Binding ResetCommand, Mode=OneTime}" />
-        <Button Content="{x:Static root:OperatorCharacters.EqualSign}" Style="{StaticResource EqualButtonStyle}"
+        <Button Content="{x:Static root:SymbolCharacters.EqualSign}" Style="{StaticResource EqualButtonStyle}"
                 Command="{Binding CalculateCommand, Mode=OneTime}" />
     </UniformGrid>
 </UserControl>
