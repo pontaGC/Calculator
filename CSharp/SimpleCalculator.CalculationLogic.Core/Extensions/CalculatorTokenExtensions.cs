@@ -67,6 +67,32 @@ namespace SimpleCalculator.CalculationLogic.Core.Extensions
         }
 
         /// <summary>
+        /// Gets a value indicating there is a left bracket token in the target token collection.
+        /// </summary>
+        /// <param name="tokens">The token collection to check.</param>
+        /// <returns>
+        /// <c>true</c> if a left bracket symbol is found in <paramref name="tokens"/>, otherwise, <c>false</c>.
+        /// Returns <c>false</c>, if <paramref name="tokens"/> is <c>null</c>.
+        /// </returns>
+        public static bool HasLeftBrackets(this IEnumerable<CalculatorToken> tokens)
+        {
+            if (tokens is null)
+            {
+                return false;
+            }
+
+            foreach (var token in tokens)
+            {
+                if (EqualsSymbol(token.Value, SymbolConstants.RoundBracket.Left))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Concatenates the given token values to get an expression.
         /// </summary>
         /// <param name="source">The source to concatenate.</param>

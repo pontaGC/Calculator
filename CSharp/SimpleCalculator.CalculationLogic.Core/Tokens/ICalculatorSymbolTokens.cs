@@ -42,6 +42,14 @@ namespace SimpleCalculator.CalculationLogic.Core
         CalculatorToken FindSymbolToken(string tokenValue);
 
         /// <summary>
+        /// Finds the bracket symbol token whose value is same as the given token value.
+        /// </summary>
+        /// <param name="tokenValue">The token value to look for.</param>
+        /// <returns>A symbol token if finding symbol token is successful, otherwise, returns <c>null</c>.</returns>
+        [return: MaybeNull]
+        CalculatorToken FindBracketToken(string tokenValue);
+
+        /// <summary>
         /// Finds the math operator token whose value is same as the operator charater.
         /// </summary>
         /// <param name="operatorCharacter">The operator string to look for.</param>

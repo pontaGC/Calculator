@@ -18,5 +18,27 @@
         public const string Nine = "9";
 
         public const string Period = ".";
+
+        /// <summary>
+        /// Enumerates all numerical characters.
+        /// </summary>
+        public static IEnumerable<string> EnumerateAll
+        {
+            get
+            {
+                yield return Zero;
+                yield return One;
+                yield return Two;
+                yield return Three;
+                yield return Four;
+                yield return Five;
+                yield return Six;
+                yield return Seven;
+                yield return Eight;
+                yield return Nine;
+                yield return Period;
+            }
+        }
+
     }
 }

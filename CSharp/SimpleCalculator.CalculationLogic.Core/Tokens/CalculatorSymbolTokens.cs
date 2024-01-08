@@ -108,13 +108,19 @@ namespace SimpleCalculator.CalculationLogic.Core
                 return null;
             }
 
-            var foundSymbolToken = this.AllTokens.FirstOrDefault(t => t.Value.Equals(tokenValue, StringComparison.OrdinalIgnoreCase));
-            if (foundSymbolToken is not null)
+            return this.AllTokens.SingleOrDefault(t => t.Value.Equals(tokenValue, StringComparison.OrdinalIgnoreCase));
+        }
+
+        /// <inheritdoc />
+        [return: MaybeNull]
+        public CalculatorToken FindBracketToken(string tokenValue)
+        {
+            if (string.IsNullOrEmpty(tokenValue))
             {
-                return foundSymbolToken;
+                return null;
             }
 
-            return null;
+            return this.AllBrackets.SingleOrDefault(b => b.Value.Equals(tokenValue, StringComparison.OrdinalIgnoreCase));
         }
 
         /// <inheritdoc />
@@ -126,7 +132,7 @@ namespace SimpleCalculator.CalculationLogic.Core
                 return null;
             }
 
-            var foundOperator = this.AllOperators.FirstOrDefault(op => op.Value.Equals(operatorString, StringComparison.OrdinalIgnoreCase));
+            var foundOperator = this.AllOperators.SingleOrDefault(op => op.Value.Equals(operatorString, StringComparison.OrdinalIgnoreCase));
             return foundOperator;
         }
 
@@ -139,8 +145,7 @@ namespace SimpleCalculator.CalculationLogic.Core
                 return null;
             }
 
-            var foundOperator = this.AllBinaryOpeartors.FirstOrDefault(op => op.Value.Equals(operatorString, StringComparison.OrdinalIgnoreCase));
-            return foundOperator;
+            return this.AllBinaryOpeartors.FirstOrDefault(op => op.Value.Equals(operatorString, StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion
