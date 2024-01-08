@@ -140,11 +140,16 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
         #region Private Methods
 
+        private static bool IsZeroString(string numberString)
+        {
+            return numberString == NumericalCharacters.Zero || numberString == NumericalCharacters.ZeroZero;
+        }
+
         private void InputZero(string zero)
         {
             Debug.Assert(IsZeroString(zero), $"Input must be zero. Actual input: {zero}");
 
-            if (this.IsCurrentInputtingNumberZero())
+            if (this.NumericalInput == NumericalCharacters.Zero)
             {
                 // Not need to update (Keep input number zero)
                 return;
@@ -237,22 +242,17 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
             if (!this.calculatorTokens.HasLeftBrackets())
             {
-                // Skip not to input right bracket
                 return;
             }
 
-            // Determines number term
-            var numberToken = NumberTokenFactory.Create(this.NumericalInput);
-            if (numberToken is null)
+            if (!this.AddCurrentNumberInputToken())
             {
-                // Skip not to input right bracket
+                // Prevents invalid expression
                 return;
             }
-
-            this.calculatorTokens.Add(numberToken);
 
             this.AddCalculationBracketToken(rightRoundBracket);
-            this.AddDisplayExpressionTokens(numberToken.Value, rightRoundBracket);
+            this.AddDisplayExpressionTokens(rightRoundBracket);
 
             this.lastInput = rightRoundBracket;
         }
@@ -270,7 +270,6 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 return;
             }
 
-            var displayNewTokens = new List<string>();
             if (this.IsPreviousInputBinaryOperator())
             {
                 // To update binary operator
@@ -279,19 +278,11 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             }
             else if (!this.IsPreviousInputRightRoundBracket())
             {
-                // Determines number term
-                var numberToken = NumberTokenFactory.Create(NumericalInput);
-                if (numberToken is not null)
-                {
-                    this.calculatorTokens.Add(numberToken);
-                    displayNewTokens.Add(numberToken.Value);
-                }
-             }
+                this.AddCurrentNumberInputToken();
+            }
 
             this.calculatorTokens.Add(@operator);
-
-            displayNewTokens.Add(selectedOperator);
-            this.AddDisplayExpressionTokens(displayNewTokens.ToArray());
+            this.AddDisplayExpressionTokens(selectedOperator);
 
             this.lastInput = selectedOperator;
         }
@@ -305,13 +296,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
             if (!this.IsPreviousInputRightRoundBracket())
             {
-                // Determines number term
-                var numberToken = NumberTokenFactory.Create(this.NumericalInput);
-                if (numberToken is not null)
-                {
-                    this.calculatorTokens.Add(numberToken);
-                    this.AddDisplayExpressionTokens(this.NumericalInput);
-                }
+                this.AddCurrentNumberInputToken();
             }
 
             try
@@ -363,16 +348,6 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             this.lastInput = string.Empty;
         }
 
-        private static bool IsZeroString(string numberString)
-        {
-            return numberString == NumericalCharacters.Zero || numberString == NumericalCharacters.ZeroZero;
-        }
-
-        private bool IsCurrentInputtingNumberZero()
-        {
-            return this.NumericalInput == NumericalCharacters.Zero;
-        }
-
         private bool TryGetMathOperator(string input, out MathOperator result)
         {
             result = null;
@@ -401,6 +376,19 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         private bool IsPreviousInputRightRoundBracket()
         {
             return SymbolCharacters.RightRoundBracket == this.lastInput;
+        }
+
+        private bool AddCurrentNumberInputToken()
+        {
+            var numberToken = NumberTokenFactory.Create(this.NumericalInput);
+            if (numberToken is not null)
+            {
+                this.calculatorTokens.Add(numberToken);
+                this.AddDisplayExpressionTokens(this.NumericalInput);
+                return true;
+            }
+
+            return false;
         }
 
         private bool AddCalculationBracketToken(string input)

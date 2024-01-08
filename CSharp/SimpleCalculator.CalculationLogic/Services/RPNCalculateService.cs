@@ -1,7 +1,6 @@
 ﻿using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Services;
 using SimpleCalculator.Core.Extensions;
-using SimpleCalculator.Core.Utils;
 
 namespace SimpleCalculator.CalculationLogic.Services
 {

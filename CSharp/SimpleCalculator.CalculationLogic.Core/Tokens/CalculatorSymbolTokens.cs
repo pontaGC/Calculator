@@ -5,7 +5,7 @@ namespace SimpleCalculator.CalculationLogic.Core
     /// <summary>
     /// Represents all symbol tokens in expression used in calculator.
     /// </summary>
-    public class CalculatorSymbolTokens : ICalculatorSymbolTokens
+    internal class CalculatorSymbolTokens : ICalculatorSymbolTokens
     {
         #region Constructors
 

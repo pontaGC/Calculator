@@ -3,7 +3,6 @@
 using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Extensions;
 using SimpleCalculator.CalculationLogic.Core.Services;
-using SimpleCalculator.Core.Utils;
 
 namespace SimpleCalculator.CalculationLogic.Services
 {

@@ -14,21 +14,6 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// </summary>
         IEnumerable<CalculatorToken> AllTokens { get; }
 
-        /// <summary>
-        /// Gets a collection of all brackets.
-        /// </summary>
-        IEnumerable<CalculatorToken> AllBrackets { get; }
-
-        /// <summary>
-        /// Gets a collection of all math operators.
-        /// </summary>
-        IEnumerable<MathOperator> AllOperators { get; }
-
-        /// <summary>
-        /// Gets a collection of all binary oeprators, e.g. "+", "/".
-        /// </summary>
-        IEnumerable<MathOperator> AllBinaryOpeartors { get;}
-
         #endregion
 
         #region Methods

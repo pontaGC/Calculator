@@ -37,39 +37,9 @@ namespace SimpleCalculator.Core.Injectors
         }
 
         /// <inheritdoc />
-        void IIoCContainer.RegisterAll<TInterface, TImplementation>(InstanceLifeStyle lifeStyle)
-        {
-            this.container.Register<TInterface, TImplementation>(LifeStyles[lifeStyle]);
-        }
-
-        /// <inheritdoc />
-        void IIoCContainer.RegisterInstance<TInterface>(TInterface instance) where TInterface : class
-        {
-            this.container.RegisterInstance(instance);
-        }
-
-        /// <inheritdoc />
-        void IIoCContainer.RegisterSingleton<TService>() where TService : class
-        {
-            this.container.RegisterSingleton<TService>();
-        }
-
-        /// <inheritdoc />
         TInterface IIoCContainer.Resolve<TInterface>() where TInterface : class
         {
             return this.container.GetInstance<TInterface>();
-        }
-
-        /// <inheritdoc />
-        IEnumerable<TInterface> IIoCContainer.GetAllInstances<TInterface>() where TInterface : class
-        {
-            return this.container.GetAllInstances<TInterface>();
-        }
-
-        /// <inheritdoc />
-        void IIoCContainer.Release()
-        {
-            this.Dispose();
         }
 
         /// <inheritdoc />

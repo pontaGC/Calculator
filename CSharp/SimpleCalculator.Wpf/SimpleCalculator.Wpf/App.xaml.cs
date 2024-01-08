@@ -19,6 +19,7 @@ namespace SimpleCalculator.Wpf
             this.RegisterAppUnhandledExceptionHandler();
 
             var container = ContainerFactory.Create();
+            RegisterDependencies(container, new CalculationLogicCoreDependencyRegistrant());
             RegisterDependencies(container, new CalculationLogicDependencyRegistrant());
 
             var mainWindowFactory = new MainWindowFactory(container);
