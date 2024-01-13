@@ -8,6 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\SimpleCalculator.CalculationLogic.Core\SimpleCalculator.CalculationLogic.Core.csproj" />
     <ProjectReference Include="..\..\SimpleCalculator.CalculationLogic\SimpleCalculator.CalculationLogic.csproj" />
