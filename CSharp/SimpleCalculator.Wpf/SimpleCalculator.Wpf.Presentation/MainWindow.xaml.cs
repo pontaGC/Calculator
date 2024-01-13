@@ -1,11 +1,9 @@
-﻿using System.Windows;
-
-namespace SimpleCalculator.Wpf.Presentation
+﻿namespace SimpleCalculator.Wpf.Presentation
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    internal partial class MainWindow : Window
+    internal partial class MainWindow
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MainWindow"/> class.
