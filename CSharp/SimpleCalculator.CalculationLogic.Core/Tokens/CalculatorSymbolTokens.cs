@@ -14,8 +14,8 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// </summary>
         public CalculatorSymbolTokens()
         {
-            this.LeftRoundBracket = new RoundBracketToken(SymbolConstants.RoundBracket.Left);
-            this.RightRoundBracket = new RoundBracketToken(SymbolConstants.RoundBracket.Right);
+            this.LeftRoundBracket = new LeftRoundBracketToken();
+            this.RightRoundBracket = new RightRoundBracketToken();
 
             this.Add = new AddOperator();
             this.Subtract = new SubtractOperator();

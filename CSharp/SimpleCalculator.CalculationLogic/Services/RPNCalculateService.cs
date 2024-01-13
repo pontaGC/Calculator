@@ -39,6 +39,11 @@ namespace SimpleCalculator.CalculationLogic.Services
                             throw new NotSupportedException("Unary operator is not supported");
 
                         case MathOperatorType.Binary:
+                            if (workingStack.Count < 2)
+                            {
+                                throw new ArithmeticException("Not enough constant terms to execute binary operator.");
+                            }
+
                             var binaryOperateResult = ExecuteBinaryOperator(workingStack, @operator);
                             workingStack.Push(binaryOperateResult);
                             break;
@@ -56,13 +61,8 @@ namespace SimpleCalculator.CalculationLogic.Services
 
         #region Private Methods
 
-        private double ExecuteBinaryOperator(Stack<double> numberStack, MathOperator @operator)
+        private static double ExecuteBinaryOperator(Stack<double> numberStack, MathOperator @operator)
         {
-            if (numberStack.Count < 2)
-            {
-                throw new ArithmeticException("Not enough constant terms to execute binary operator.");
-            }
-
             // num1 {binary operator} num2 as infix notation
             var num2 = numberStack.Pop();
             var num1 = numberStack.Pop();
