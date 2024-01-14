@@ -87,14 +87,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         {
             [return: NotNull]
             get => this.numericalInput ?? string.Empty;
-            set
-            {
-                if (this.SetProperty(ref this.numericalInput, value))
-                {
-                    // Updated
-                    this.lastInput = value;
-                }
-            }
+            set => this.SetProperty(ref this.numericalInput, value);
         }
 
         /// <summary>
