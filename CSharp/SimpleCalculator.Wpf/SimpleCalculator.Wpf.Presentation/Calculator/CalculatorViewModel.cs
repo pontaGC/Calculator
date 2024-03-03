@@ -312,7 +312,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             }
             catch (Exception ex)
             {
-                this.NumericalInput = ex.Message;
+                this.NumericalInput = ex.GetMessage();
             }
             finally
             {
