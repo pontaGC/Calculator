@@ -295,6 +295,8 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
             if (!this.IsPreviousInputRightRoundBracket())
             {
+                // Determines the constant term with current number input.
+                // Considered that the constant term has been determined when the previous input is ')'.
                 this.AddCurrentNumberInputToken();
             }
 
@@ -336,17 +338,26 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             this.InitializeCalculatorTokens();
         }
 
+        /// <summary>
+        /// Initializes a calculation expression displayed in view.
+        /// </summary>
         private void InitializeCurrentExpression()
         {
             this.CurrentExpression = string.Empty;
         }
 
+        /// <summary>
+        /// Initializes the expression tokens for diplay and internal logic.
+        /// </summary>
         private void InitializeCalculatorTokens()
         {
             this.displayExpressionTokens.Clear();
             this.calculatorTokens.Clear();
         }
 
+        /// <summary>
+        /// Initializes the numerical input and clears the last input record.
+        /// </summary>
         private void InitializeUserInput()
         {
             this.NumericalInput = NumericalCharacters.Zero;
