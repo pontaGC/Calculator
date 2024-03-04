@@ -307,6 +307,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 }
                 else
                 {
+                    // 15 is the number to ignore binary errors
                     this.NumericalInput = Math.Round(calculatedResult, 15).ToString();
                 }
             }
