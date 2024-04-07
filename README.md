@@ -2,6 +2,9 @@
 
 A simple calculator application for learning programming.
 
+#### Sample image (C# - WPF)
+![Sample - SimpleCalculator.Wpf](CSharp/SimpleCalculator.Wpf/SimpleCalculator.Wpf.jpg)
+
 ## Programming Languages
 
 ### C# - WPF
