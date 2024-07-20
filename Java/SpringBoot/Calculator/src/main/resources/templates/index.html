@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{this::title}, ~{this::body})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Calculator</title>
+    <title>Top page | Calculator</title>
 </head>
 <body>
-<p>Hello world!</p>
+<h1 class="mt-3">Calculators</h1>
+<ul>
+    <li>
+        <a href="./calculators/calculator.html" th:href="@{/calculator}">Calculator</a>
+    </li>
+</ul>
+<h2 class="mt-3">Source code</h2>
+<ul>
+    <li>
+        <a href="https://github.com/pontaGC/Calculator">GitHub</a>
+    </li>
+</ul>
+
 </body>
 </html>
