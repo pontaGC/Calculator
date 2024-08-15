@@ -100,7 +100,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// <returns><c>true</c> if this token's priority is higher than <paramref name="targetPriority"/>, otherwise, <c>false</c>.</returns>
         public bool HasHigherPriority(uint targetPriority)
         {
-            return this.Priority > targetPriority;
+            return Priority > targetPriority;
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace SimpleCalculator.CalculationLogic.Core
         /// <returns><c>true</c> if this token's priority is equal to or higher than <paramref name="targetPriority"/>, otherwise, <c>false</c>.</returns>
         public bool HasSameOrHigherPriority(uint targetPriority)
         {
-            return  this.Priority >= targetPriority;
+            return  Priority >= targetPriority;
         }
 
         #endregion
