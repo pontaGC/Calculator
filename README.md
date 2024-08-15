@@ -17,9 +17,9 @@ A simple calculator application for learning programming.
 
 ![Assembly dependencies image](CSharp/SimpleCalculator.Wpf/AssemblyDependencyImage.svg)
 
-### Python
+<!-- ### Python
 
 | Environment | Version |
 | ---- | ---- |
 | Python | 3.12.0 |
-| Pycharm  | 2023.3.2 |
+| Pycharm  | 2023.3.2 | -->
