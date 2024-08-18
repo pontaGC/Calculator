@@ -14,7 +14,7 @@ namespace SimpleCalculator.Core.Extensions
         /// <param name="source">The source.</param>
         /// <returns>
         /// The <c>true</c> if the last element is successfully removed; otherwise, <c>false</c>.
-        /// </returns>d
+        /// </returns>
         [DebuggerStepThrough]
         public static bool RemoveLast<T>(this IList<T> source)
         {
@@ -28,15 +28,14 @@ namespace SimpleCalculator.Core.Extensions
                 return false;
             }
 
-            try
-            {
-                source.RemoveAt(source.Count - 1);
-                return true;
-            }
-            catch
+            var lastIndex = source.Count - 1;
+            if (lastIndex < 0)
             {
                 return false;
             }
+
+            source.RemoveAt(lastIndex);
+            return true;
         }
     }
 }
