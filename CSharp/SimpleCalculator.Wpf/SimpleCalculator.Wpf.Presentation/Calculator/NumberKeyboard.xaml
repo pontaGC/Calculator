@@ -32,7 +32,7 @@
         <Button Content="{x:Static root:NumericalCharacters.Three}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
         <!--0 00 .-->
         <Button Content="{x:Static root:NumericalCharacters.Zero}" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.ZeroZero}" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="{x:Static root:NumericalCharacters.ZeroZero}" Command="{Binding InputZeroZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
         <Button Content="{x:Static root:NumericalCharacters.Period}" Command="{Binding InputPeriodCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
     </UniformGrid>
 </UserControl>
