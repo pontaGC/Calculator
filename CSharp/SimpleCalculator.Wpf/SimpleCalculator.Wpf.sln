@@ -5,13 +5,18 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator.Wpf", "SimpleCalculator.Wpf\SimpleCalculator.Wpf.csproj", "{A1D4393A-7E4E-4B13-B1C1-578D0E920749}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculator.Core", "..\SimpleCalculator.Core\SimpleCalculator.Core.csproj", "{431A788B-4A44-43B2-8181-EAA5FADC43CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator.Core", "..\SimpleCalculator.Core\SimpleCalculator.Core.csproj", "{431A788B-4A44-43B2-8181-EAA5FADC43CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculator.Wpf.Presentation", "SimpleCalculator.Wpf.Presentation\SimpleCalculator.Wpf.Presentation.csproj", "{374FF95F-5131-4B84-BE67-65ED0F095245}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator.Wpf.Presentation", "SimpleCalculator.Wpf.Presentation\SimpleCalculator.Wpf.Presentation.csproj", "{374FF95F-5131-4B84-BE67-65ED0F095245}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculator.CalculationLogic.Core", "..\SimpleCalculator.CalculationLogic.Core\SimpleCalculator.CalculationLogic.Core.csproj", "{DA457E6B-3529-4555-9A05-AAD00FB0E105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator.CalculationLogic.Core", "..\SimpleCalculator.CalculationLogic.Core\SimpleCalculator.CalculationLogic.Core.csproj", "{DA457E6B-3529-4555-9A05-AAD00FB0E105}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleCalculator.CalculationLogic", "..\SimpleCalculator.CalculationLogic\SimpleCalculator.CalculationLogic.csproj", "{28237333-12F2-4DC9-B744-48B8D331D67B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleCalculator.CalculationLogic", "..\SimpleCalculator.CalculationLogic\SimpleCalculator.CalculationLogic.csproj", "{28237333-12F2-4DC9-B744-48B8D331D67B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ソリューション項目", "ソリューション項目", "{5BDC1D0D-7B90-4539-A1AF-93C6A7A72C43}"
+	ProjectSection(SolutionItems) = preProject
+		ReleaseBuild.ps1 = ReleaseBuild.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
