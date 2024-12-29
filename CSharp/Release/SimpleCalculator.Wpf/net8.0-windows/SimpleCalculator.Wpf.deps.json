@@ -83,7 +83,10 @@
           "SimpleCalculator.Core": "1.0.0"
         },
         "runtime": {
-          "SimpleCalculator.CalculationLogic.dll": {}
+          "SimpleCalculator.CalculationLogic.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.1.0"
+          }
         }
       },
       "SimpleCalculator.CalculationLogic.Core/1.0.0": {
@@ -91,7 +94,10 @@
           "SimpleCalculator.Core": "1.0.0"
         },
         "runtime": {
-          "SimpleCalculator.CalculationLogic.Core.dll": {}
+          "SimpleCalculator.CalculationLogic.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.1.0"
+          }
         }
       },
       "SimpleCalculator.Core/1.0.0": {
@@ -100,7 +106,10 @@
           "System.Reactive": "6.0.0"
         },
         "runtime": {
-          "SimpleCalculator.Core.dll": {}
+          "SimpleCalculator.Core.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.1.0"
+          }
         }
       },
       "SimpleCalculator.Wpf.Presentation/1.0.0": {
@@ -110,7 +119,10 @@
           "SimpleCalculator.Core": "1.0.0"
         },
         "runtime": {
-          "SimpleCalculator.Wpf.Presentation.dll": {}
+          "SimpleCalculator.Wpf.Presentation.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.1.0"
+          }
         }
       }
     }
