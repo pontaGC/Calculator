@@ -192,12 +192,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
         private void InputLeftRoundBracket(string leftRoundBracket)
         {
-            if (!this.symbolConverter.TryConvertDisplayToLogicString(leftRoundBracket, out var logicSymbol))
-            {
-                return;
-            }
-
-            var bracketToken = this.symbolTokens.FindBracketToken(logicSymbol);
+            var bracketToken = this.symbolTokens.FindBracketToken(leftRoundBracket);
             if (bracketToken is null)
             {
                 // Invalid token
@@ -217,12 +212,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
         private void InputRightRoundBracket(string rightRoundBracket)
         {
-            if (!this.symbolConverter.TryConvertDisplayToLogicString(rightRoundBracket, out var logicSymbol))
-            {
-                return;
-            }
-
-            var bracketToken = this.symbolTokens.FindBracketToken(logicSymbol);
+            var bracketToken = this.symbolTokens.FindBracketToken(rightRoundBracket);
             if (bracketToken is null)
             {
                 // Invalid token
@@ -240,11 +230,12 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             }
         }
 
-        private void InputBinaryOperator(string selectedOperator)
+        private void InputBinaryOperator(string selectedLogicOperator)
         {
-            if (!this.TryGetMathOperator(selectedOperator,  out var @operator))
+            var @operator = this.symbolTokens.FindBinaryOperator(selectedLogicOperator);
+            if (@operator is null)
             {
-                Debug.Fail($"Found the unexpected binary operator: {selectedOperator}");
+                Debug.Fail($"Found the unexpected binary operator: {selectedLogicOperator}");
                 return;
             }
 
@@ -330,20 +321,6 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             this.inputController.InitializeUserInput();
         }
 
-        private bool TryGetMathOperator(string input, out MathOperator result)
-        {
-            result = null;
-
-            // The operators displayed on the calculator and used by calculation logic may be different.
-            if (!this.symbolConverter.TryConvertDisplayToLogicString(input, out var operatorLogicCharacter))
-            {
-                return false;
-            }
-
-            result = this.symbolTokens.FindMathOperator(operatorLogicCharacter);
-            return result is not null;
-         }
-
         private void OnNumericalInputChanged(string newValue)
         {
             this.NumericalInput = newValue;
@@ -369,7 +346,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
                 if (token.IsSymbol)
                 {
-                    if (this.symbolConverter.TryConvertLogicToDisplayString(token.Value, out var displayTokenValue))
+                    if (SymbolConverter.TryConvertLogicToDisplayString(token.Value, out var displayTokenValue))
                     {
                         displayTokens.Add(displayTokenValue);
                     }

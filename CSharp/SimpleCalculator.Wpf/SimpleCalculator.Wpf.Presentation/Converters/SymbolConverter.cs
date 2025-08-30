@@ -14,58 +14,53 @@ namespace SimpleCalculator.Wpf.Presentation.Converters
     [ValueConversion(typeof(string), typeof(string))]
     internal class SymbolConverter : IValueConverter
     {
-        private readonly IReadOnlyDictionary<string, string> operatorConversions;
-
-        /// <summary>
-        /// Intializes a new instance of the <see cref="SymbolConverter"/> class.
-        /// </summary>
-        public SymbolConverter()
+        private static readonly IReadOnlyDictionary<string, string> DisplaySymbolConversions = new Dictionary<string, string>()
         {
-            this.operatorConversions = new Dictionary<string, string>()
-            {
-                { SymbolCharacters.Add, LogicSymbols.Add },
-                { SymbolCharacters.Subtract, LogicSymbols.Subtract },
-                { SymbolCharacters.Multiply, LogicSymbols.Multiply },
-                { SymbolCharacters.Divide, LogicSymbols.Divide },
-                { SymbolCharacters.LeftRoundBracket, LogicSymbols.RoundBracket.Left },
-                { SymbolCharacters.RightRoundBracket, LogicSymbols.RoundBracket.Right },
-            };
-        }
+            { SymbolCharacters.Add, LogicSymbols.Add },
+            { SymbolCharacters.Subtract, LogicSymbols.Subtract },
+            { SymbolCharacters.Multiply, LogicSymbols.Multiply },
+            { SymbolCharacters.Divide, LogicSymbols.Divide },
+            { SymbolCharacters.LeftRoundBracket, LogicSymbols.RoundBracket.Left },
+            { SymbolCharacters.RightRoundBracket, LogicSymbols.RoundBracket.Right },
+        };
+
+        // Reverse conversions from display symbols to logic symbols
+        private static readonly IReadOnlyDictionary<string, string> LogicSymbolConversions = DisplaySymbolConversions.ToDictionary(x => x.Value, x => x.Key);
 
         /// <inheritdoc />
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var logicOperatorValue = value as string;
-            if (string.IsNullOrEmpty(logicOperatorValue))
+            var displaySymbolValue = value as string;
+            if (string.IsNullOrEmpty(displaySymbolValue))
             {
-                return DependencyProperty.UnsetValue;
+                return Binding.DoNothing;
             }
 
-            if (this.TryConvertLogicToDisplayString(logicOperatorValue, out var displayString))
+            if (TryConvertDisplayToLogicString(displaySymbolValue, out var logicOperatorString))
             {
-                return displayString;
+                return logicOperatorString;
             }
 
-            Debug.Fail($"Found unknown operator: {logicOperatorValue}");
-            return logicOperatorValue;
+            Debug.Fail($"Found unknown operator: {displaySymbolValue}");
+            return displaySymbolValue;
         }
 
         /// <inheritdoc />
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var displayOperatorString = value as string;
-            if (string.IsNullOrEmpty(displayOperatorString))
+            var logicSymbolValue = value as string;
+            if (string.IsNullOrEmpty(logicSymbolValue))
             {
-                return Binding.DoNothing;
+                return DependencyProperty.UnsetValue;
             }
 
-            if (TryConvertDisplayToLogicString(displayOperatorString, out var logicOperatorString))
+            if (TryConvertLogicToDisplayString(logicSymbolValue, out var displayString))
             {
-                return logicOperatorString;
+                return displayString;
             }
 
-            Debug.Fail($"Found unknown operator: {displayOperatorString}");
-            return displayOperatorString;
+            Debug.Fail($"Found unknown operator: {logicSymbolValue}");
+            return logicSymbolValue;
         }
 
         /// <summary>
@@ -74,9 +69,9 @@ namespace SimpleCalculator.Wpf.Presentation.Converters
         /// <param name="operatorDisplaytring">The operator display string.</param>
         /// <param name="result">The logic string.</param>
         /// <returns><c>true</c> if the conversion is successful, otherwise, <c>false</c>.</returns>
-        public bool TryConvertDisplayToLogicString(string operatorDisplaytring, out string result)
+        public static bool TryConvertDisplayToLogicString(string operatorDisplaytring, out string result)
         {
-            return this.operatorConversions.TryGetValue(operatorDisplaytring, out result);
+            return DisplaySymbolConversions.TryGetValue(operatorDisplaytring, out result);
         }
 
         /// <summary>
@@ -85,10 +80,9 @@ namespace SimpleCalculator.Wpf.Presentation.Converters
         /// <param name="operatorLogicString">The operator string used by calculration logic.</param>
         /// <param name="result">The logic string.</param>
         /// <returns><c>true</c> if the conversion is successful, otherwise, <c>false</c>.</returns>
-        public bool TryConvertLogicToDisplayString(string operatorLogicString, out string result)
+        public static bool TryConvertLogicToDisplayString(string operatorLogicString, out string result)
         {
-            var reverseOperatorConversions = operatorConversions.ToDictionary(x => x.Value, x => x.Key);
-            return reverseOperatorConversions.TryGetValue(operatorLogicString, out result);
+            return LogicSymbolConversions.TryGetValue(operatorLogicString, out result);
         }
     }
 }
