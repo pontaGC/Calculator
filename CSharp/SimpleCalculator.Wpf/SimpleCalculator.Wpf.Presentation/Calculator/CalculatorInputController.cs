@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Subjects;
+
 using SimpleCalculator.CalculationLogic.Core;
 using SimpleCalculator.CalculationLogic.Core.Extensions;
 using SimpleCalculator.Core.Extensions;
@@ -59,7 +60,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         /// </summary>
         public void InitializeUserInput()
         {
-            this.UpdateNumericalInput(NumericalCharacters.Zero);
+            this.UpdateNumericalInput("0");
             this.State = CalculatorInputState.Initialized;
         }
 
@@ -98,11 +99,11 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                     return;
 
                 case CalculatorInputState.NumberInputted:
-                    this.AppendNumericalInput(JoinSameCharacters(NumericalCharacters.Zero, addingCount));
+                    this.AppendNumericalInput(JoinSameCharacters("0", addingCount));
                     return;
 
                 case CalculatorInputState.DecimalPointInpuuted:
-                    this.AppendNumericalInput(JoinSameCharacters(NumericalCharacters.Zero, addingCount));
+                    this.AppendNumericalInput(JoinSameCharacters("0", addingCount));
                     this.State = CalculatorInputState.NumberInputted;
                     return;
 
@@ -203,7 +204,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
                 case CalculatorInputState.Initialized:
                 case CalculatorInputState.BinaryOperatorInputted:
                 case CalculatorInputState.Calculated:
-                    this.UpdateNumericalInput($"{NumericalCharacters.Zero}{decimalPoint}"); // 0.
+                    this.UpdateNumericalInput($"0{decimalPoint}"); // 0.
                     break;
 
                 case CalculatorInputState.NumberInputted:
@@ -361,7 +362,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
 
         private static bool IsZeroString(string numberString)
         {
-            return numberString == NumericalCharacters.Zero || numberString == NumericalCharacters.ZeroZero;
+            return numberString == "0" || numberString == "00";
         }
 
         private void UpdateNumericalInput(string value)

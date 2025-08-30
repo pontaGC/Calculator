@@ -19,20 +19,20 @@
     
     <UniformGrid Columns="3">
         <!--7 8 9-->
-        <Button Content="{x:Static root:NumericalCharacters.Seven}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Eight}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Nine}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="7" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="8" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="9" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
         <!--4 5 6-->
-        <Button Content="{x:Static root:NumericalCharacters.Four}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Five}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Six}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="4" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="5" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="6" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
         <!--1 2 3-->
-        <Button Content="{x:Static root:NumericalCharacters.One}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Two}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Three}" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="1" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="2" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="3" Command="{Binding InputNonZeroIntegerCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
         <!--0 00 .-->
-        <Button Content="{x:Static root:NumericalCharacters.Zero}" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.ZeroZero}" Command="{Binding InputZeroZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
-        <Button Content="{x:Static root:NumericalCharacters.Period}" Command="{Binding InputPeriodCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="0" Command="{Binding InputZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="00" Command="{Binding InputZeroZeroCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
+        <Button Content="." Command="{Binding InputPeriodCommand, Mode=OneTime}" Style="{StaticResource NumericalButtonSytle}" />
     </UniformGrid>
 </UserControl>
