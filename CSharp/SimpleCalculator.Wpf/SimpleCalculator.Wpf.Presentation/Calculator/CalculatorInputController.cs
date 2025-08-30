@@ -67,7 +67,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
         /// <summary>
         /// Sets calculated resut.
         /// </summary>
-        public void Calculated(string result)
+        public void SetCalculatedResult(string result)
         {
             this.UpdateNumericalInput(result);
             this.State = CalculatorInputState.Calculated;

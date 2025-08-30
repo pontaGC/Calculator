@@ -286,7 +286,7 @@ namespace SimpleCalculator.Wpf.Presentation.Calculator
             }
             finally
             {
-                this.inputController.Calculated(result);
+                this.inputController.SetCalculatedResult(result);
 
                 // Current expression is not be initialized here,
                 // so that the target calculation can be checked 
