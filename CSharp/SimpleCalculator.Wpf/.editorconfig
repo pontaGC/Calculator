@@ -136,8 +136,8 @@ dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggesti
 dotnet_style_prefer_inferred_tuple_names = true:suggestion
 dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
 dotnet_style_prefer_auto_properties = true:suggestion
-dotnet_style_prefer_conditional_expression_over_assignment = true:silent
-dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_conditional_expression_over_assignment = true:suggestion # Assign using ternary operator
+dotnet_style_prefer_conditional_expression_over_return = true:suggestion # Return using ternary operator
 csharp_prefer_simple_default_expression = true:suggestion
 
 # Expression-bodied members
@@ -175,7 +175,7 @@ csharp_style_prefer_range_operator = false:none
 csharp_style_pattern_local_over_anonymous_function = false:none
 
 # IDE0005: Remove unnecessary using directives
-dotnet_diagnostic.IDE0005.severity = suggestion
+dotnet_diagnostic.IDE0005.severity = warning
 
 # IDE0031: Use null propagation - keep as silent hint to avoid build errors with TreatWarningsAsErrors
 dotnet_diagnostic.IDE0031.severity = silent
@@ -199,19 +199,41 @@ dotnet_diagnostic.IDE0071.severity = silent
 csharp_style_implicit_object_creation_when_type_is_apparent = false:none
 
 # CA1305: Specify IFormatProvider to prevent culture-dependent bugs
-dotnet_diagnostic.CA1305.severity = silent
+dotnet_diagnostic.CA1305.severity = suggestion
+
+# CA1806: Do not ignore method results
+# [Security] Prevents subsequent processing from proceeding as if validation had succeeded even if validation had failed
+dotnet_diagnostic.CA1806.severity = error
+
+# CA1820: Test for empty strings using string length
+dotnet_diagnostic.CA1820.severity = warning
+
+# CA1822: Mark members as static
+# [Performance] Identifies instance members that do not access instance data and can be marked as static.
+dotnet_diagnostic.CA1822.severity = warning
+
+# CA1825: Avoid zero-length array allocations
+# [Performance] Identifies instances where an empty array is allocated, and suggests using Array.Empty<T>() instead to avoid unnecessary allocations.
+dotnet_diagnostic.CA1825.severity = warning
 
 # CA1849: Call async methods when in an async method
 dotnet_diagnostic.CA1849.severity = warning
 
+# CA1852: Seal internal types
+dotnet_diagnostic.CA1852.severity = none
+
 # CA2000: Dispose objects before losing scope
 dotnet_diagnostic.CA2000.severity = error
+
+# CA2012: Use ValueTasks correctly
+dotnet_diagnostic.CA2012.severity = error
 
 # CA2213: Disposable fields should be disposed
 dotnet_diagnostic.CA2213.severity = error
 
-# CA2012: Use ValueTasks correctly
-dotnet_diagnostic.CA2012.severity = error
+# CA2100: Review SQL queries for security vulnerabilities
+# [Security] Prevents SQ injection vulnerabilities by flagging instances where a SQL query is constructed from user input without proper validation or parameterization
+dotnet_diagnostic.CA2100.severity = error
 
 # Space preferences
 csharp_space_after_cast = false
