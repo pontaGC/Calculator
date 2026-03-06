@@ -1,3 +1,10 @@
+# Copyright (c) .NET Foundation and Contributors.
+# Portions Copyright (c) 2026 PontaGC
+#
+# Licensed under the MIT license.
+# See LICENSE file in the project root for full license information.
+# Derived from: https://github.com/dotnet/runtime
+
 # top-most EditorConfig file
 root = true
 
