@@ -230,7 +230,7 @@ dotnet_diagnostic.CA2012.severity = error
 
 # CA2200: Rethrow to preserve stack details
 # [Reliability] Prevents loss of stack trace
-dotnet_diagnostic.CA2200.severity = warning
+dotnet_diagnostic.CA2200.severity = error
 
 # CA2213: Disposable fields should be disposed
 dotnet_diagnostic.CA2213.severity = error
