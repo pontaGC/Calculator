@@ -23,7 +23,7 @@ namespace SimpleCalculator.Core.Mvvm
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        private PropertyChangedEventHandler propertyChangedInternalEvent;
+        private PropertyChangedEventHandler? propertyChangedInternalEvent;
 
         #endregion
 
@@ -50,7 +50,7 @@ namespace SimpleCalculator.Core.Mvvm
         /// <param name="onChanged">The action that is called after the property value has been changed.</param>
         /// <param name="propertyName">The property name.</param>
         /// <returns><c>true</c> if the value was changed, <c>false</c> if the existing value matched the desired value.</returns>
-        protected virtual bool SetProperty<T>(ref T backingStore, T value, Action onChanged, [CallerMemberName] string propertyName = null)
+        protected virtual bool SetProperty<T>(ref T backingStore, T value, Action onChanged, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {
@@ -71,7 +71,7 @@ namespace SimpleCalculator.Core.Mvvm
         /// <param name="value">The setting value.</param>
         /// <param name="propertyName">The property name.</param>
         /// <returns><c>true</c> if the value was changed, <c>false</c> if the existing value matched the desired value.</returns>
-        protected virtual bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string propertyName = null)
+        protected virtual bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {
@@ -88,7 +88,7 @@ namespace SimpleCalculator.Core.Mvvm
         /// Raises property changed event.
         /// </summary>
         /// <param name="propertyName">The property name.</param>
-        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
         {
             this.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
