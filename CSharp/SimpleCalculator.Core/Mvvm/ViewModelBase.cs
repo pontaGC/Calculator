@@ -14,7 +14,7 @@ namespace SimpleCalculator.Core.Mvvm
         /// <summary>
         /// Occurs when a property value changes.
         /// </summary>
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        event PropertyChangedEventHandler? INotifyPropertyChanged.PropertyChanged
         {
             add => this.propertyChangedInternalEvent += value;
             remove => this.propertyChangedInternalEvent -= value;
